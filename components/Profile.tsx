@@ -1,6 +1,7 @@
 import useCustom from "@/hooks/useCustom";
 import convertToBase64 from "@/library/cover";
 import { useFormik } from "formik";
+import Cookies from "js-cookie";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -66,6 +67,7 @@ function Profile() {
   /***_______  Logout handleer   ________**/
   const logOut = () => {
     localStorage.removeItem("next3.0");
+    Cookies.remove("next3.0");
     router.push("/login");
     console.log("logout!");
   };

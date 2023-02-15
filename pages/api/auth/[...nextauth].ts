@@ -7,23 +7,20 @@ export default NextAuth({
   providers: [
     /***_______  Google Provider   ________**/
     GoogleProvider({
-      // @ts-ignore
-      clientId: process.env.NEXT_PUBLIC_PREFIX_GOOGLE_CLIENT_ID,
-      // @ts-ignore
-      clientSecret: process.env.NEXT_PUBLIC_PREFIX_GOOGLE_CLIENT_SECRET,
+      clientId: process.env.NEXT_PUBLIC_PREFIX_GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env
+        .NEXT_PUBLIC_PREFIX_GOOGLE_CLIENT_SECRET as string,
     }),
     /***_______  GitHub Provider   ________**/
     GitHubProvider({
-      // @ts-ignore
-      clientId: process.env.NEXT_PUBLIC_PREFIX_GITHUB_CLIENT_ID,
-      // @ts-ignore
-      clientSecret: process.env.NEXT_PUBLIC_PREFIX_GITHUB_CLIENT_SECRET,
+      clientId: process.env.NEXT_PUBLIC_PREFIX_GITHUB_CLIENT_ID as string,
+      clientSecret: process.env
+        .NEXT_PUBLIC_PREFIX_GITHUB_CLIENT_SECRET as string,
     }),
     FacebookProvider({
-      //@ts-ignore
-      clientId: process.env.NEXT_PUBLIC_PREFIX_FACEBOOK_CLIENT_ID,
-      //@ts-ignore
-      clientSecret: process.env.NEXT_PUBLIC_PREFIX_FACEBOOK_CLIENT_SECRET,
+      clientId: process.env.NEXT_PUBLIC_PREFIX_FACEBOOK_CLIENT_ID as string,
+      clientSecret: process.env
+        .NEXT_PUBLIC_PREFIX_FACEBOOK_CLIENT_SECRET as string,
     }),
   ],
 });

@@ -1,14 +1,14 @@
 import Layout from "@/layout/layout";
-import { getUserToken } from "@/library/helper";
 import styles from "@/styles/Home.module.css";
 import { Inter } from "@next/font/google";
+import jwt from "jsonwebtoken";
 import { GetServerSideProps } from "next";
 import { getSession, signOut } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactElement, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { ReactElement } from "react";
+import { useDispatch } from "react-redux";
 import Profile from "../components/Profile";
 import { setToken, setUserDetails } from "../redux/Sclice/reducer";
 
@@ -16,35 +16,21 @@ const inter = Inter({ subsets: ["latin"] });
 
 /***_______  COMPONENT HOME   ________**/
 
-export default function Home({ session }: any) {
-  const [loading, setLoading] = useState(true);
+export default function Home({ session, decoded, token }: any) {
   const dispatch = useDispatch();
   /***_______     ________**/
-  const state = useSelector((state: any) => state.app.client);
-  /***_______     ________**/
-  getUserToken()
-    .then(({ decoded, token }: any) => {
-      setLoading(false);
-      dispatch(setToken(token));
-      dispatch(
-        setUserDetails({ username: decoded?.username, id: decoded?.userId })
-      );
-    })
-    .catch((err) => {
-      setLoading(false);
-      console.log(err);
-    });
+  if (decoded && token) {
+    dispatch(setToken(token));
+    dispatch(
+      setUserDetails({ username: decoded?.username, id: decoded?.userId })
+    );
+  }
 
   /***_______   SignUt Handler  ________**/
   function singOutHandler() {
     signOut();
   }
-  if (!session && loading)
-    return (
-      <h2 className="text-center font-bold text-2xl text-rose-500">
-        Loading...
-      </h2>
-    );
+
   return (
     <>
       <Layout>
@@ -57,8 +43,8 @@ export default function Home({ session }: any) {
 
         {session
           ? User({ session, singOutHandler })
-          : state?.token
-          ? UserTow(state)
+          : decoded
+          ? UserTow(decoded)
           : GustUser()}
       </Layout>
     </>
@@ -138,20 +124,55 @@ function UserTow(state: any): ReactElement {
 
 /***_______  GetServerSideProps   ________**/
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const session = await getSession({ req });
+export const getServerSideProps: GetServerSideProps = async (contex) => {
+  try {
+    const session = await getSession({ req: contex.req });
+    const token: any = contex.req.cookies["next3.0"] || false;
+    let decoded: any = false;
 
-  // if (!session) {
-  //   return {
-  //     redirect: {
-  //       destination: "/login",
-  //       permanent: false,
-  //     },
-  //   };
-  // }
-  return {
-    props: {
-      session,
-    },
-  };
+    /***_______  check token have or not   ________**/
+
+    if (token) {
+      decoded = jwt.verify(
+        token,
+        //@ts-ignore
+        process.env.NEXT_PUBLIC_PREFIX_JWT_SECRET_KEY
+      );
+      /***_______  Check token expire or not   ________**/
+      if (!decoded) throw new Error("session expire!");
+
+      return {
+        props: {
+          session,
+          decoded,
+          token,
+        },
+      };
+    } else if (session) {
+      console.log("Next3.0 token not found!");
+      return {
+        props: {
+          session,
+          decoded,
+          token,
+        },
+      };
+      /***_______  REDIRECT TO LOGIN   ________**/
+    } else {
+      return {
+        redirect: {
+          destination: "/login",
+          permanent: false,
+        },
+      };
+    }
+  } catch (err: any) {
+    console.log(err?.message);
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
 };

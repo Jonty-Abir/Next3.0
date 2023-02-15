@@ -88,7 +88,9 @@ function Register(): ReactElement {
         // }}
         />
         <section className="py-4 flex flex-col mx-auto gap-4">
-          <h2 className="font-semibold text-2xl">Register</h2>
+          <h2 className="font-semibold text-3xl uppercase text-gray-700 font-serif">
+            Register
+          </h2>
           <form
             className="flex flex-col mx-auto w-3/4 pt-4 gap-2"
             onSubmit={formik.handleSubmit}

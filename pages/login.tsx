@@ -1,5 +1,6 @@
 import Layout from "@/layout/layout";
 import { useFormik } from "formik";
+import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 import { signIn } from "next-auth/react";
 import Head from "next/head";
@@ -69,6 +70,7 @@ function Login(): ReactElement {
           );
           /***_______  Store token in local storage   ________**/
           localStorage.setItem("next3.0", token);
+          Cookies.set("next3.0", token);
           setLoading(false);
           router.push("/");
         })
@@ -98,7 +100,9 @@ function Login(): ReactElement {
         </Head>
         <Toaster />
         <section className="p-4 flex flex-col mx-auto gap-4">
-          <h2 className="font-semibold text-2xl">Sign In</h2>
+          <h2 className="font-semibold text-3xl font-serif text-gray-700 uppercase">
+            Sign In
+          </h2>
           <form
             className="flex flex-col mx-auto w-3/4 pt-4 gap-2"
             onSubmit={formik.handleSubmit}
@@ -178,7 +182,11 @@ function Login(): ReactElement {
               Login
             </button>
           </form>
-          <p>Forget Password</p>
+          <Link href={"/recovery"}>
+            <p className="font-serif font-semibold text-rose-500 cursor-pointer">
+              Forget Password
+            </p>
+          </Link>
           {/* Scocial Icone */}
           <div className="flex flex-col gap-1">
             {/* Gooogle */}
