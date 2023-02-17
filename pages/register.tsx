@@ -324,7 +324,7 @@ function Register(): ReactElement {
               className="bg-green-500 rounded-md py-2 p-2 hover:ring-2 hover:ring-green-800 focus:scale-95
                duration-200 text-gray-50 font-semibold uppercase"
             >
-              Submit
+              {loading ? "Submiting..." : "Submit"}
             </button>
           </form>
           {/* Scocial Icone */}
@@ -368,7 +368,7 @@ function Register(): ReactElement {
                   href={"/login"}
                   className="font-popins font-semibold underline"
                 >
-                  Login
+                  login
                 </Link>
               </span>
             </code>

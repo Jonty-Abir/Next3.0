@@ -87,7 +87,7 @@ function Login(): ReactElement {
   const gitHubSignInHandler = () => {
     signIn("github", { callbackUrl: "http://localhost:3000" });
   };
-  /***_______  gitHubSignInHandler   ________**/
+  // /***_______  gitHubSignInHandler   ________**/
   const faceBookSignInHandler = () => {
     signIn("facebook", { callbackUrl: "http://localhost:3000" });
   };
@@ -179,7 +179,7 @@ function Login(): ReactElement {
               className="bg-green-500 rounded-md py-2 p-2 hover:ring-2 hover:ring-green-800 focus:scale-95
                duration-200 text-gray-50 font-semibold"
             >
-              Login
+              {loading ? "Wait..." : "Login"}
             </button>
           </form>
           <Link href={"/recovery"}>
@@ -189,14 +189,13 @@ function Login(): ReactElement {
           </Link>
           {/* Scocial Icone */}
           <div className="flex flex-col gap-1">
+            <p className="text-gray-700 capitalize font-bold ">Signin with</p>
             {/* Gooogle */}
             <div
               className=" flex mx-auto border-2 items-center gap-2 px-3 py-1 rounded-md cursor-pointer"
               onClick={googleSingin}
             >
-              <p className="text-md font-semibold text-gray-600">
-                Signin with Google
-              </p>
+              <p className="text-md font-semibold text-gray-600">Google</p>
               <span>
                 <Image
                   src={"/assets/google.svg"}
@@ -211,9 +210,7 @@ function Login(): ReactElement {
               className=" flex mx-auto border-2 items-center gap-2 px-3 py-1 rounded-md cursor-pointer"
               onClick={gitHubSignInHandler}
             >
-              <p className="text-md font-semibold text-gray-600">
-                Signin with Git Hub
-              </p>
+              <p className="text-md font-semibold text-gray-600">Git Hub</p>
               <span>
                 <Image
                   src={"/assets/github.svg"}
@@ -228,9 +225,7 @@ function Login(): ReactElement {
               className=" flex mx-auto border-2 items-center gap-2 px-3 py-1 rounded-md cursor-pointer"
               onClick={faceBookSignInHandler}
             >
-              <p className="text-md font-semibold text-gray-600">
-                Signin with FaceBook
-              </p>
+              <p className="text-md font-semibold text-gray-600">Facebook</p>
               <span>
                 <Image
                   src={"/assets/facebook.svg"}
@@ -250,7 +245,7 @@ function Login(): ReactElement {
                   href={"/register"}
                   className="font-popins font-semibold underline text-md"
                 >
-                  Register
+                  register
                 </Link>
               </span>
             </code>

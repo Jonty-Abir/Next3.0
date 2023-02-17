@@ -32,7 +32,8 @@ export default async function resetPwApi(
         {},
         newData.toJSON()
       );
-
+      //@ts-ignore
+      global.locals = { resetSession: false };
       res.status(200).json({ msg: "success", user: rest });
     } else {
       res.status(400).json({ error: "bad request! [error code:400]" });
