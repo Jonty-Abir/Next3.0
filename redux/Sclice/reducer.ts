@@ -1,10 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 interface obj {
-  client: { token: string; userName: string; _id: string };
+  client: {
+    token: string;
+    userName: string;
+    _id: string;
+    recoveryEmail: string;
+    recoveryID: string;
+  };
 }
 
 const initialState: obj = {
-  client: { token: "", userName: "", _id: "" },
+  client: {
+    token: "",
+    userName: "",
+    _id: "",
+    recoveryEmail: "",
+    recoveryID: "",
+  },
 };
 
 const reducerSclice = createSlice({
@@ -18,8 +30,15 @@ const reducerSclice = createSlice({
       state.client._id = payload.id;
       state.client.userName = payload.username;
     },
+    setRecoveryEmail: (state, { payload }) => {
+      state.client.recoveryEmail = payload;
+    },
+    setRecoveryID: (state, { payload }) => {
+      state.client.recoveryID = payload;
+    },
   },
 });
 
 export default reducerSclice.reducer;
-export const { setToken, setUserDetails } = reducerSclice.actions;
+export const { setToken, setUserDetails, setRecoveryEmail, setRecoveryID } =
+  reducerSclice.actions;

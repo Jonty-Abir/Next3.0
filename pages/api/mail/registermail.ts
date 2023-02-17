@@ -1,3 +1,4 @@
+import connection from "@/DataBase/connection";
 import { Users } from "@/model/modelSchema";
 import Mailgen from "mailgen";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -7,6 +8,11 @@ export default async function regiesterMail(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  /***_______  Connect To MongoDB   ________**/
+  connection().catch((err) => {
+    // res.status(502).json({ error: "Connection Failed!" })
+    console.log(err?.message);
+  });
   try {
     /***_______  Check req body passed   ________**/
 
@@ -16,7 +22,7 @@ export default async function regiesterMail(
     const isValidEmail = await Users.findOne({ email: req.body.email });
     if (!isValidEmail) throw new Error("User not found to send email");
 
-    const { mobile, email, text, subject } = req.body;
+    const { email, text, subject } = req.body;
     /***_______   create the configaretion object   ________**/
 
     const config = {
@@ -31,15 +37,15 @@ export default async function regiesterMail(
     let MailGenerator = new Mailgen({
       theme: "default",
       product: {
-        name: "Abir Santra",
-        link: "https://abirsantraonline.netlify.com",
+        name: "Next3.0",
+        link: "https://authentication-with-next-auth.vercel.app/",
       },
     });
     let emailDetails = {
       body: {
         // name: username,
         intro: text || "",
-        outro: "Thank you.",
+        outro: "",
       },
     };
     // create the email body
@@ -55,7 +61,7 @@ export default async function regiesterMail(
     transport
       .sendMail(message)
       .then(() => {
-        res.status(201).json({ msg: "You should recevied a email form us." });
+        res.status(201).json({ msg: "You should recevie an email form us." });
       })
       .catch((err: any) => {
         res.status(500).json({ error: "email could't send" });

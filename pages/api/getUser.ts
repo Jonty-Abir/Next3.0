@@ -17,8 +17,10 @@ export default async function getUser(
       if (!req.query) throw new Error("there was serverside error!");
       const { userName } = req.query;
       const data = await Users.findOne({
-        username: userName,
+        // username: userName,
+        $or: [{ username: userName }, { email: userName }],
       });
+      if (!data) throw new Error("there was server side error!");
       const { password, cpassword, ...rest } = Object.assign({}, data.toJSON());
       res.status(200).json({ msg: "success", user: rest });
     } else {

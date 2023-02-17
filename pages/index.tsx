@@ -135,8 +135,7 @@ export const getServerSideProps: GetServerSideProps = async (contex) => {
     if (token) {
       decoded = jwt.verify(
         token,
-        //@ts-ignore
-        process.env.NEXT_PUBLIC_PREFIX_JWT_SECRET_KEY
+        process.env.NEXT_PUBLIC_PREFIX_JWT_SECRET_KEY as string
       );
       /***_______  Check token expire or not   ________**/
       if (!decoded) throw new Error("session expire!");

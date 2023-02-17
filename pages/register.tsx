@@ -87,7 +87,7 @@ function Register(): ReactElement {
         //   },
         // }}
         />
-        <section className="py-4 flex flex-col mx-auto gap-4">
+        <section className="py-4 my-10 flex flex-col mx-auto gap-4">
           <h2 className="font-semibold text-3xl uppercase text-gray-700 font-serif">
             Register
           </h2>

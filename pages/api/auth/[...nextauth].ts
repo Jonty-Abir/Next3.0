@@ -23,4 +23,5 @@ export default NextAuth({
         .NEXT_PUBLIC_PREFIX_FACEBOOK_CLIENT_SECRET as string,
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET as string,
 });

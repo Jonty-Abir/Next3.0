@@ -61,7 +61,7 @@ export function formikValidateHandlerRegiseter(value: obj): object {
   } else if (value.cpassword.length < 5) {
     // @ts-ignore
 
-    errors.cpassword = "At-least 5 digit mustcc!";
+    errors.cpassword = "At-least 5 digit must!";
   } else if (value.password !== value.cpassword) {
     // errors.password = "both password are not same!";
     // @ts-ignore
@@ -140,5 +140,37 @@ export async function updateValidatorHandler(value: update) {
     errors.email = "enter a valid email address!";
   }
 
+  return errors;
+}
+
+export function resetPasswordValidation(value: any) {
+  const errors = {};
+  /***_______     ________**/
+
+  if (!value.password) {
+    // @ts-ignore
+
+    errors.password = "Required*";
+  } else if (value.password.length < 5) {
+    // @ts-ignore
+
+    errors.password = "At-least 5 digit must!";
+  }
+  /***_______     ________**/
+
+  if (!value.cpassword) {
+    // @ts-ignore
+
+    errors.cpassword = "Required*";
+  } else if (value.cpassword.length < 5) {
+    // @ts-ignore
+
+    errors.cpassword = "At-least 5 digit must!";
+  } else if (value.password !== value.cpassword) {
+    // errors.password = "both password are not same!";
+    // @ts-ignore
+
+    errors.cpassword = "both password are not same!";
+  }
   return errors;
 }

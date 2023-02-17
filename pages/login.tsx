@@ -99,7 +99,7 @@ function Login(): ReactElement {
           <title>Login Page</title>
         </Head>
         <Toaster />
-        <section className="p-4 flex flex-col mx-auto gap-4">
+        <section className="p-4 my-10 flex flex-col mx-auto gap-4">
           <h2 className="font-semibold text-3xl font-serif text-gray-700 uppercase">
             Sign In
           </h2>

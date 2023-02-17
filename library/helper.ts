@@ -76,7 +76,7 @@ export async function getUser({ username }: any) {
       `/api/getUser?userName=${username}`
     );
     if (status !== 200) throw new Error("can't get data!");
-    return { data, status };
+    return Promise.resolve({ data, status });
   } catch (err: any) {
     return Promise.reject(err?.message);
   }
@@ -99,5 +99,80 @@ export async function updateUser({ id, formData, userName }: obj) {
     throw new Error("server error!");
   } catch (err: any) {
     return Promise.reject(err?.response?.data?.error || "server error!");
+  }
+}
+
+/***_______  Genarate OTP And send OTP to Client Email   ________**/
+
+interface para {
+  userEmail: string;
+}
+export async function gengenerateOTPAndSendEmail({ userEmail }: para) {
+  try {
+    const {
+      data: { OTP },
+      status,
+    } = await instance.get("/api/otpGenerator");
+    if (status === 201) {
+      const {
+        data: { user },
+      } = await getUser({ username: userEmail });
+
+      /***_______     ________**/
+      if (!user) throw new Error("error was accure!");
+      let text = `Your password recovery OTP is <h2>${OTP}</h2>`;
+      /***_______  Send a mail on Client email address    ________**/
+      const body = {
+        username: user?.username,
+        email: user?.email,
+        text,
+        subject: "Forget Password OTP",
+      };
+
+      const { data } = await instance.post("/api/mail/registermail", body);
+      return Promise.resolve({ status, OTP, user });
+    } else {
+      throw new Error("Could not generate OTP!");
+    }
+  } catch (err: any) {
+    console.log(err);
+    return Promise.reject(err?.message);
+  }
+}
+
+/***_______   verify OTP  ________**/
+
+interface verifyOtpPara {
+  code: string;
+}
+export async function verifyOtp({ code }: verifyOtpPara) {
+  try {
+    if (!code) throw new Error("error was accure!");
+    const { data, status } = await instance.get(`/api/verifyOtp?code=${code}`);
+    return Promise.resolve({ data, status });
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
+/***_______  resetPassword   ________**/
+
+interface resetPara {
+  id: string;
+  body: object;
+}
+export async function resetPassword({ id, body }: resetPara) {
+  try {
+    if (!id) throw new Error("id parametter must need!");
+    const { data, status } = await instance.put(
+      `/api/update/reset/${id}`,
+      body
+    );
+    if (status === 200) {
+      return Promise.resolve("success");
+    }
+    throw new Error("error was accure!");
+  } catch (err: any) {
+    return Promise.reject(err);
   }
 }
