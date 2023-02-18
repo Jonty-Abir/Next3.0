@@ -2,13 +2,13 @@ import Classes from "../styles/layout.module.css";
 
 import { PropsWithChildren } from "react";
 function Layout({ children }: PropsWithChildren) {
-  const rand = Math.floor(Math.random() * 5);
-  const imgarr = [
-    `url("/assets/cloud_2.png")`,
-    `url("/assets/img1.jpg")`,
-    `url("/assets/img2.jpg")`,
-    `url("/assets/img3.jpg")`,
-  ];
+  // const rand = Math.floor(Math.random() * 5);
+  // const imgarr = [
+  //   `url("/assets/cloud_2.png")`,
+  //   `url("/assets/img1.jpg")`,
+  //   `url("/assets/img2.jpg")`,
+  //   `url("/assets/img3.jpg")`,
+  // ];
   return (
     <>
       <main className="w-screen h-screen items-center flex flex-cols bg-blue-400">

@@ -1,5 +1,6 @@
 import Layout from "@/layout/layout";
 import { useFormik } from "formik";
+import { signIn } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -45,6 +46,16 @@ let initialValues: formikObj = {
   password: "",
   cpassword: "",
 };
+
+/***_______   Google signIn handler  ________**/
+async function googleSingin() {
+  signIn("google", { callbackUrl: "http://localhost:3000" });
+}
+/***_______  gitHubSignInHandler   ________**/
+const gitHubSignInHandler = () => {
+  signIn("github", { callbackUrl: "http://localhost:3000" });
+};
+
 function Register(): ReactElement {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -330,7 +341,10 @@ function Register(): ReactElement {
           {/* Scocial Icone */}
           <div className="flex flex-col gap-1">
             {/* Gooogle */}
-            <div className=" flex mx-auto border-2 items-center gap-2 px-3 py-1 rounded-md cursor-pointer">
+            <div
+              className=" flex mx-auto border-2 items-center gap-2 px-3 py-1 rounded-md cursor-pointer"
+              onClick={googleSingin}
+            >
               <p className="text-md font-semibold text-gray-600">
                 Signin with Google
               </p>
@@ -345,7 +359,10 @@ function Register(): ReactElement {
             </div>
             <div></div>
             {/* Git Hub */}
-            <div className=" flex mx-auto border-2 items-center gap-2 px-3 py-1 rounded-md cursor-pointer">
+            <div
+              className=" flex mx-auto border-2 items-center gap-2 px-3 py-1 rounded-md cursor-pointer"
+              onClick={gitHubSignInHandler}
+            >
               <p className="text-md font-semibold text-gray-600">
                 Signin with Git Hub
               </p>
