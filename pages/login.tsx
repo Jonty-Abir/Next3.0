@@ -81,15 +81,21 @@ function Login(): ReactElement {
   });
   /***_______   Google signIn handler  ________**/
   async function googleSingin() {
-    signIn("google", { callbackUrl: "http://localhost:3000" });
+    signIn("google", {
+      callbackUrl: "https://authentication-with-next-auth.vercel.app",
+    });
   }
   /***_______  gitHubSignInHandler   ________**/
   const gitHubSignInHandler = () => {
-    signIn("github", { callbackUrl: "http://localhost:3000" });
+    signIn("github", {
+      callbackUrl: "https://authentication-with-next-auth.vercel.app",
+    });
   };
   // /***_______  gitHubSignInHandler   ________**/
   const faceBookSignInHandler = () => {
-    signIn("facebook", { callbackUrl: "http://localhost:3000" });
+    signIn("facebook", {
+      callbackUrl: "https://authentication-with-next-auth.vercel.app",
+    });
   };
 
   return (
