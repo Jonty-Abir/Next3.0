@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import Cookies from "js-cookie";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
@@ -114,6 +115,20 @@ function Profile() {
       </Head>
       <Toaster />
       <section className="p-4 flex flex-col mx-auto gap-y-6 ">
+        <div className="flex justify-between">
+          <Link href={"/dropbox"}>
+            <div className="px-3 py-2 bg-green-500 text-white rounded-md hover:scale-105 duration-300">
+              {" "}
+              Go With DropBoox
+            </div>
+          </Link>
+          <Link href={"/gdDrive"}>
+            <div className="px-3 py-2 bg-green-500 text-white rounded-md hover:scale-105 duration-300">
+              {" "}
+              Go With Google Drive
+            </div>
+          </Link>
+        </div>
         <h2 className="text-gray-700 font-bold text-4xl uppercase">Profile</h2>
         {/* Form */}
         <div className="form">

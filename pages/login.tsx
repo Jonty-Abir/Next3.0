@@ -82,21 +82,24 @@ function Login(): ReactElement {
   /***_______   Google signIn handler  ________**/
   async function googleSingin() {
     signIn("google", {
-      callbackUrl: "https://authentication-with-next-auth.vercel.app",
+      // callbackUrl: "https://authentication-with-next-auth.vercel.app",
+      callbackUrl: "http://localhost:3000",
     });
   }
   /***_______  gitHubSignInHandler   ________**/
-  const gitHubSignInHandler = () => {
-    signIn("github", {
-      callbackUrl: "https://authentication-with-next-auth.vercel.app",
-    });
-  };
+  // const gitHubSignInHandler = () => {
+  //   signIn("github", {
+  //     // callbackUrl: "https://authentication-with-next-auth.vercel.app",
+  //     callbackUrl: "http://localhost:3000",
+  //   });
+  // };
   // /***_______  gitHubSignInHandler   ________**/
-  const faceBookSignInHandler = () => {
-    signIn("facebook", {
-      callbackUrl: "https://authentication-with-next-auth.vercel.app",
-    });
-  };
+  // const faceBookSignInHandler = () => {
+  //   signIn("facebook", {
+  //     // callbackUrl: "https://authentication-with-next-auth.vercel.app",
+  //     callbackUrl: "http://localhost:3000",
+  //   });
+  // };
 
   return (
     <>
@@ -212,7 +215,7 @@ function Login(): ReactElement {
               </span>
             </div>
             {/* Git Hub */}
-            <div
+            {/* <div
               className=" flex mx-auto border-2 items-center gap-2 px-3 py-1 rounded-md cursor-pointer"
               onClick={gitHubSignInHandler}
             >
@@ -225,9 +228,9 @@ function Login(): ReactElement {
                   alt="scocil_icone"
                 ></Image>
               </span>
-            </div>
+            </div> */}
             {/* FaceBook */}
-            <div
+            {/* <div
               className=" flex mx-auto border-2 items-center gap-2 px-3 py-1 rounded-md cursor-pointer"
               onClick={faceBookSignInHandler}
             >
@@ -240,7 +243,7 @@ function Login(): ReactElement {
                   alt="scocil_icone"
                 ></Image>
               </span>
-            </div>
+            </div> */}
           </div>
           {/* Buttom */}
           <div>

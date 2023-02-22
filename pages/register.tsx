@@ -49,12 +49,14 @@ let initialValues: formikObj = {
 
 /***_______   Google signIn handler  ________**/
 async function googleSingin() {
+  // callbackUrl: "https://authentication-with-next-auth.vercel.app",
   signIn("google", { callbackUrl: "http://localhost:3000" });
 }
 /***_______  gitHubSignInHandler   ________**/
-const gitHubSignInHandler = () => {
-  signIn("github", { callbackUrl: "http://localhost:3000" });
-};
+// const gitHubSignInHandler = () => {
+//   // callbackUrl: "https://authentication-with-next-auth.vercel.app",
+//   signIn("github", { callbackUrl: "http://localhost:3000" });
+// };
 
 function Register(): ReactElement {
   const router = useRouter();
@@ -359,7 +361,7 @@ function Register(): ReactElement {
             </div>
             <div></div>
             {/* Git Hub */}
-            <div
+            {/* <div
               className=" flex mx-auto border-2 items-center gap-2 px-3 py-1 rounded-md cursor-pointer"
               onClick={gitHubSignInHandler}
             >
@@ -374,7 +376,7 @@ function Register(): ReactElement {
                   alt="scocil_icone"
                 ></Image>
               </span>
-            </div>
+            </div> */}
           </div>
           {/* Buttom */}
           <div>
