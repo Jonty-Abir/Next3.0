@@ -64,6 +64,7 @@ export default async function regiesterMail(
         res.status(201).json({ msg: "You should recevie an email form us." });
       })
       .catch((err: any) => {
+        console.log(err);
         res.status(500).json({ error: "email could't send" });
       });
   } catch (err: any) {

@@ -115,11 +115,17 @@ function Profile() {
       </Head>
       <Toaster />
       <section className="p-4 flex flex-col mx-auto gap-y-6 ">
-        <div className="flex justify-between">
+        <div className="flex flex-col gap-2 justify-between">
           <Link href={"/dropbox"}>
             <div className="px-3 py-2 bg-green-500 text-white rounded-md hover:scale-105 duration-300">
               {" "}
               Go With DropBoox
+            </div>
+          </Link>
+          <Link href={"/products"}>
+            <div className="px-3 py-2 bg-green-500 text-white rounded-md hover:scale-105 duration-300">
+              {" "}
+              Products
             </div>
           </Link>
           <Link href={"/gdDrive"}>

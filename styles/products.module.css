@@ -1,0 +1,41 @@
+.main {
+  @apply flex flex-col h-[100%] w-full;
+}
+.nav {
+  @apply flex justify-between items-center p-4 px-2 text-gray-600 text-lg font-semibold border-b-2 border-gray-400;
+}
+
+.ul {
+  @apply flex gap-10 items-center;
+}
+
+.li {
+  @apply hover:text-green-500;
+}
+.products {
+  @apply bg-gray-300 w-full flex flex-wrap p-4 gap-2 justify-center;
+}
+.card {
+  @apply bg-white flex flex-col justify-evenly items-center w-[20rem] md:w-[15rem] text-center rounded-md gap-2 gap-y-4 p-4 pt-8;
+}
+.img {
+  @apply bg-cover mx-auto mb-4;
+}
+.text {
+  @apply text-gray-800 text-sm font-semibold;
+}
+.button {
+  @apply bg-orange-400 text-white rounded-sm px-4  py-2 flex items-center gap-x-2;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.title {
+  max-width: 10rem;
+  text-align: center;
+}

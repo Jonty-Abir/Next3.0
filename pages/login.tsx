@@ -72,7 +72,7 @@ function Login(): ReactElement {
           localStorage.setItem("next3.0", token);
           Cookies.set("next3.0", token);
           setLoading(false);
-          router.push("/");
+          router.push("/products");
         })
         .catch((err: any) => {
           setLoading(false);

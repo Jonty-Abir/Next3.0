@@ -1,5 +1,6 @@
 import Layout from "@/layout/layout";
 import { useFormik } from "formik";
+import jwt from "jsonwebtoken";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -18,12 +19,26 @@ export const getServerSideProps: GetServerSideProps = async (contex) => {
   /***_______   WHEN USER LOGI THEN DONT NEED FORET PASSWORDs   ________**/
 
   if (token || session) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
+    try {
+      const isValid = jwt.verify(
+        token,
+        process.env.NEXT_PUBLIC_PREFIX_JWT_SECRET_KEY as string
+      );
+
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+      };
+    } catch (err) {
+      /***_______     ________**/
+      return {
+        props: {
+          developer: "Abir Santra",
+        },
+      };
+    }
   }
   return {
     props: {

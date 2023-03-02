@@ -45,7 +45,8 @@ export default function Home({ session, decoded, token }: any) {
           ? User({ session, singOutHandler })
           : decoded
           ? UserTow(decoded)
-          : GustUser()}
+          : /***_______  manula user hom page   ________**/
+            GustUser()}
       </Layout>
     </>
   );
